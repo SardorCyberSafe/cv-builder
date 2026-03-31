@@ -2,7 +2,7 @@
 
 Oddiy va tezkor CV yaratish vositasi. O'zbekiston foydalanuvchilari uchun maxsus ishlab chiqilgan.
 
-**[🔗 Live Demo](https://your-username.github.io/cv-builder)**
+**[🔗 Live Demo](https://sardorcybersafe.github.io/cv-builder)**
 
 ---
 
@@ -31,7 +31,7 @@ git init
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/your-username/cv-builder.git
+git remote add origin https://github.com/SardorCyberSafe/cv-builder.git
 git push -u origin main
 ```
 

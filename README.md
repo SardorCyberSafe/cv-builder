@@ -24,19 +24,6 @@ Oddiy va tezkor CV yaratish vositasi. O'zbekiston foydalanuvchilari uchun maxsus
 
 `index.html` faylini brauzerda oching — tayyor!
 
-### GitHub Pages orqali
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/SardorCyberSafe/cv-builder.git
-git push -u origin main
-```
-
-Keyin **Settings → Pages → Source: main branch** ni tanlang.
-
 ### Lokal server
 
 ```bash

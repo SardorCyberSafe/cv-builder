@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Yaratuvchi — Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <h1 class="logo">📄 CV Yaratuvchi</h1>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="uz">UZ</button>
+                    <button class="lang-btn" data-lang="ru">RU</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <section class="form-panel">
+            <div class="form-container">
+                <div class="template-selector">
+                    <h3 data-i18n="templateTitle">Shablon Tanlang</h3>
+                    <div class="template-options">
+                        <button class="template-btn active" data-template="simple">
+                            <span class="template-preview simple-preview"></span>
+                            <span data-i18n="templateSimple">Oddiy</span>
+                        </button>
+                        <button class="template-btn" data-template="modern">
+                            <span class="template-preview modern-preview"></span>
+                            <span data-i18n="templateModern">Zamonaviy</span>
+                        </button>
+                        <button class="template-btn" data-template="it">
+                            <span class="template-preview it-preview"></span>
+                            <span data-i18n="templateIT">IT</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form id="cvForm" class="cv-form">
+                    <fieldset class="form-section">
+                        <legend data-i18n="personalInfo">Shaxsiy Ma'lumotlar</legend>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName" data-i18n="firstName">Ism</label>
+                                <input type="text" id="firstName" name="firstName" data-i18n-placeholder="firstName" placeholder="Ismingiz">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" data-i18n="lastName">Familiya</label>
+                                <input type="text" id="lastName" name="lastName" data-i18n-placeholder="lastName" placeholder="Familiyangiz">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profession" data-i18n="profession">Kasb / Lavozim</label>
+                            <input type="text" id="profession" name="profession" data-i18n-placeholder="profession" placeholder="Masalan: Dasturchi">
+                        </div>
+                        <div class="form-group">
+                            <label for="summary" data-i18n="summary">Qisqacha Ma'lumot</label>
+                            <textarea id="summary" name="summary" rows="3" data-i18n-placeholder="summary" placeholder="O'zingiz haqingizda qisqacha..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" data-i18n="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" data-i18n="phone">Telefon</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+998 90 123 45 67">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" data-i18n="location">Manzil</label>
+                            <input type="text" id="location" name="location" data-i18n-placeholder="location" placeholder="Shahar, Davlat">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="linkedin">LinkedIn</label>
+                                <input type="url" id="linkedin" name="linkedin" placeholder="linkedin.com/in/username">
+                            </div>
+                            <div class="form-group">
+                                <label for="website" data-i18n="website">Veb-sayt</label>
+                                <input type="url" id="website" name="website" placeholder="example.com">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend data-i18n="experience">Ish Tajribasi</legend>
+                        <div id="experienceList"></div>
+                        <button type="button" class="add-btn" data-add="experience" data-i18n="addExperience">+ Ish Tajribasi Qo'shish</button>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend data-i18n="education">Ta'lim</legend>
+                        <div id="educationList"></div>
+                        <button type="button" class="add-btn" data-add="education" data-i18n="addEducation">+ Ta'lim Qo'shish</button>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend data-i18n="skills">Ko'nikmalar</legend>
+                        <div class="form-group">
+                            <label for="skills" data-i18n="skillsPlaceholder">Ko'nikmalar (vergul bilan ajrating)</label>
+                            <textarea id="skills" name="skills" rows="3" data-i18n-placeholder="skillsPlaceholder" placeholder="JavaScript, Python, React, Node.js..."></textarea>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend data-i18n="languages">Tillar</legend>
+                        <div id="languageList"></div>
+                        <button type="button" class="add-btn" data-add="language" data-i18n="addLanguage">+ Til Qo'shish</button>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend data-i18n="projects">Loyihalar</legend>
+                        <div id="projectList"></div>
+                        <button type="button" class="add-btn" data-add="project" data-i18n="addProject">+ Loyiha Qo'shish</button>
+                    </fieldset>
+                </form>
+
+                <div class="form-actions">
+                    <button type="button" id="downloadPdf" class="btn-primary" data-i18n="downloadPdf">📥 PDF Yuklab Olish</button>
+                    <button type="button" id="clearForm" class="btn-secondary" data-i18n="clearForm">🗑 Tozalash</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="preview-panel">
+            <div class="preview-header">
+                <h3 data-i18n="preview">Jonli Ko'rinish</h3>
+            </div>
+            <div class="preview-container">
+                <div id="cvPreview" class="cv-preview"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="translations.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
